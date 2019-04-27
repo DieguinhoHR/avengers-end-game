@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import { MainPage } from 'pages/main'
+import CharacterShow from 'pages/characters/character-show'
 import { Characters } from 'pages/characters'
 import { CssBaseline } from '@material-ui/core'
 
@@ -14,8 +14,8 @@ function App () {
         <BrowserRouter>
           <Nav />
           <Switch>
-            <Route path='/' component={MainPage} exact />
-            <Route path='/characters' component={Characters} exact />
+            <Route path='/' component={Characters} exact />
+            <Route path='/characters/:id' component={CharacterShow} />
           </Switch>
         </BrowserRouter>
       </CssBaseline>
