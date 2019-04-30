@@ -11,6 +11,10 @@ import Typography from '@material-ui/core/Typography'
 import Tooltip from '@material-ui/core/Tooltip'
 import Grid from '@material-ui/core/Grid'
 import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+// pega todas as funções e coloca em um grande objeto
+import * as modalActions from 'store/actions/show-modal'
 
 const styles = theme => ({
   root: {
@@ -42,7 +46,12 @@ function MediaCard (props) {
   const { classes, characters } = props
 
   return (
-    <Grid container className={classes.root} spacing={8} style={{ paddingTop: '22px' }}>
+    <Grid
+      container
+      className={classes.root}
+      spacing={8}
+      style={{ paddingTop: '22px' }}
+    >
       <Grid
         container
         className={classes.demo}
@@ -53,21 +62,26 @@ function MediaCard (props) {
           <Grid key={character.id} item>
             <Card className={classes.card}>
               <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image={character.thumbnail.path + '.' + character.thumbnail.extension}
-                  title={character.name}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant='h5' component='h2'>
-                    {character.name}
-                  </Typography>
-                  <Typography component='p'>
-                    {character.description
-                      ? character.description
-                      : <span style={color}>Não existe descrição</span> }
-                  </Typography>
-                </CardContent>
+                <Link
+                  to={`characters-update/${character.id}`}
+                  className={classes.aboutMore}
+                >
+                  <CardMedia
+                    className={classes.media}
+                    image={character.thumbnail.path + '.' + character.thumbnail.extension}
+                    title={character.name}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant='h5' component='h2'>
+                      {character.name}
+                    </Typography>
+                    <Typography component='p'>
+                      {character.description
+                        ? character.description
+                        : <span style={color}>Não existe descrição</span> }
+                    </Typography>
+                  </CardContent>
+                </Link>
               </CardActionArea>
               <CardActions>
                 <Button size='small' color='primary'>
@@ -97,4 +111,11 @@ MediaCard.propTypes = {
   characters: PropTypes.array.isRequired
 }
 
-export default withStyles(styles)(MediaCard)
+const mapStateToProps = state => ({
+  open: state.open
+})
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(modalActions, dispatch)
+
+export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(MediaCard))

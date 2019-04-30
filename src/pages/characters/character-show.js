@@ -14,13 +14,11 @@ import moment from 'moment'
 
 import api from 'services/api'
 
-const apiKey = '81f0bb4c1822d1761339071247ccba71'
-const hash = '1442e8456edb92d6ce42edfaf813e074'
+import * as Constants from 'all-constants'
 
 const styles = theme => ({
   card: {
     maxWidth: 900
-    // height: 900
   },
   media: {
     height: 0,
@@ -52,14 +50,12 @@ function CharacterShow (props) {
     const { id } = match.params
 
     api
-      .get(`characters/${id}?ts=1&apikey=${apiKey}&hash=${hash}`)
+      .get(`characters/${id}?ts=1&apikey=${Constants.API_KEY}&hash=${Constants.HASH}`)
       .then(result => setCharacter(result.data.data.results))
       .catch(error => {
         console.log(error.response)
       })
   }, [])
-
-  console.log(character)
 
   return (
     <Grid

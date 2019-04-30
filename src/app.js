@@ -1,25 +1,17 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-
-import CharacterShow from 'pages/characters/character-show'
-import { Characters } from 'pages/characters'
 import { CssBaseline } from '@material-ui/core'
+import Routes from 'routes/routes'
+import { Provider } from 'react-redux' // atualiza os components da nossa app
 
-import Nav from 'pages/templates/nav'
+import store from 'store'
 
 function App () {
   return (
-    <>
+    <Provider store={store}>
       <CssBaseline>
-        <BrowserRouter>
-          <Nav />
-          <Switch>
-            <Route path='/' component={Characters} exact />
-            <Route path='/characters/:id' component={CharacterShow} />
-          </Switch>
-        </BrowserRouter>
+        <Routes />
       </CssBaseline>
-    </>
+    </Provider>
   )
 }
 
