@@ -1,11 +1,10 @@
 /* eslint-disable */
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import Search from './search'
 import { Link } from 'react-router-dom'
 
 const styles = theme => ({
@@ -29,6 +28,9 @@ const styles = theme => ({
   menu: {
     color: 'white',
     textDecoration: 'none'
+  },
+  backgroundColor: {
+    backgroundColor: '#FF2400'
   }
 });
 
@@ -37,12 +39,11 @@ function Nav (props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar position='static' className={classes.backgroundColor}>
         <Toolbar>
           <Typography variant='h6' color='inherit'>
             <Link to='/' className={classes.menu}>Avengers END GAME</Link>
           </Typography>
-          <Search />
         </Toolbar>
       </AppBar>
     </div>

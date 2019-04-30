@@ -15,6 +15,7 @@ import moment from 'moment'
 import api from 'services/api'
 
 import * as Constants from 'all-constants'
+import ScreenBack from '../templates/screen-back'
 
 const styles = theme => ({
   card: {
@@ -58,52 +59,60 @@ function CharacterShow (props) {
   }, [])
 
   return (
-    <Grid
-      container
-      className={classes.root}
-      spacing={16}
-      style={{ paddingTop: '30px' }}
-    >
+    <>
+      <Typography paragraph variant='h4' align='center' style={{ paddingTop: '15px' }}>
+        <ScreenBack paddingLeft='585px' />
+      </Typography>
       <Grid
         container
-        className={classes.demo}
-        justify='center'
+        className={classes.root}
         spacing={16}
+        style={{ paddingTop: '30px' }}
       >
-        { character.map(item => (
-          <Card className={classes.card} key={item.id}>
-            <CardHeader
-              avatar={
-                <Avatar aria-label='Recipe' className={classes.avatar}>
-                  { item.name.substring(0, 1) }
-                </Avatar>
-              }
-              title={item.name}
-              subheader={moment(item.modified).format('DD/MM/YYYY HH:mm:ss')}
-            />
-            <CardMedia
-              className={classes.media}
-              image={item.thumbnail.path + '.' + item.thumbnail.extension}
-              title={item.name}
-            />
-            <CardContent>
-              <Typography paragraph variant='h4'>Séries:</Typography>
-              {item.series.items.map(serie =>
-                <Grid spacing={32} justify='center'><br />
-                  <Chip
-                    avatar={<Avatar>{serie.name.substring(0, 1)}</Avatar>}
-                    label={serie.name}
-                    clickable
-                    className={classes.chip}
-                    color='primary'
-                  />
-                </Grid>
-              )}
-            </CardContent>
-          </Card>
-        ))}
+        <Grid
+          container
+          className={classes.demo}
+          justify='center'
+          spacing={16}
+        >
+          { character.map((item) => (
+            <Card className={classes.card} key={item.id}>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label='Recipe' className={classes.avatar}>
+                    { item.name.substring(0, 1) }
+                  </Avatar>
+                }
+                title={item.name}
+                subheader={moment(item.modified).format('DD/MM/YYYY HH:mm:ss')}
+              />
+              <CardMedia
+                className={classes.media}
+                image={item.thumbnail.path + '.' + item.thumbnail.extension}
+                title={item.name}
+              />
+              <CardContent>
+                <Typography paragraph variant='h4'>
+                  Séries que o personagem {item.name} participou:
+                </Typography>
+                {item.series.items.map((serie, index) =>
+                  <Grid key={index}><br />
+                    <Chip
+                      key={serie.id}
+                      avatar={<Avatar>{serie.name.substring(0, 1)}</Avatar>}
+                      label={serie.name}
+                      clickable
+                      className={classes.chip}
+                      color='primary'
+                    />
+                  </Grid>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+        </Grid>
       </Grid>
-    </Grid>
+    </>
   )
 }
 

@@ -39,7 +39,8 @@ const styles = theme => ({
 })
 
 const color = {
-  color: '#ff0000'
+  color: '#ff0000',
+  fontSize: '20px'
 }
 
 function MediaCard (props) {
@@ -78,7 +79,7 @@ function MediaCard (props) {
                     <Typography component='p'>
                       {character.description
                         ? character.description
-                        : <span style={color}>Não existe descrição</span> }
+                        : <span style={color}>Não existe descrição no momento</span> }
                     </Typography>
                   </CardContent>
                 </Link>
