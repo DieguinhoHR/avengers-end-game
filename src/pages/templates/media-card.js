@@ -70,7 +70,7 @@ function MediaCard (props) {
                   <CardMedia
                     className={classes.media}
                     image={character.thumbnail.path + '.' + character.thumbnail.extension}
-                    title={character.name}
+                    title='Clique para atualizar'
                   />
                   <CardContent>
                     <Typography gutterBottom variant='h5' component='h2'>
@@ -91,6 +91,7 @@ function MediaCard (props) {
                     placement='right-start'
                   >
                     <Link
+                      id='about-more'
                       to={`characters/${character.id}`}
                       className={classes.aboutMore}
                     >

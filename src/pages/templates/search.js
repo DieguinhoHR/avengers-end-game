@@ -21,6 +21,7 @@ function Search (props) {
         placement='right-start'>
         <TextField
           type='search'
+          name='searchHero'
           id='outlined-full-width'
           onKeyUp={handleSearch}
           style={{ margin: 12, width: '1830px', paddingLeft: '55px' }}
